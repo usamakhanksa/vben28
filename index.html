@@ -1,52 +1,159 @@
 <!DOCTYPE html>
-<html lang="en" data-critters-container>
+<html lang="en" id="htmlRoot">
   <head>
-    <meta charset="utf-8">
-    <title>fandaqapp</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <style>
-      #lp-page-loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        user-select: none;
-        z-index: 9999999;
-        background: #7e8082;
-        transition: background 0.3s ease-out;
-      }
-
-      #lp-page-loader:after {
-        content: '';
-        display: block;
-        position: absolute;
-        left: calc(50% - 20px);
-        top: calc(50% - 20px);
-        width: 40px;
-        height: 40px;
-        border: 4px solid #fff;
-        opacity: 0.7;
-        border-top-color: transparent;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-      }
-
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-
-        to {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  <link rel="stylesheet" href="ngx-datatable-index.d0d07548685a5a69.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="ngx-datatable-index.d0d07548685a5a69.css"></noscript><style>@charset "UTF-8"</style><link rel="stylesheet" href="ngx-datatable-icons.36aa12023c4951ea.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="ngx-datatable-icons.36aa12023c4951ea.css"></noscript><link rel="stylesheet" href="ngx-datatable-material.b7ed9ad5826347be.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="ngx-datatable-material.b7ed9ad5826347be.css"></noscript><link rel="stylesheet" href="fontawesome-all.min.8e2e07be53e027c6.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="fontawesome-all.min.8e2e07be53e027c6.css"></noscript><link rel="stylesheet" href="fontawesome-v4-shims.min.0050c1d8d2323282.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="fontawesome-v4-shims.min.0050c1d8d2323282.css"></noscript><style>:root{--lpx-theme-light-bg:url(/assets/images/login/login-bg-img-light.svg);--lpx-theme-dim-bg:url(/assets/images/login/login-bg-img-dim.svg);--lpx-theme-dark-bg:url(/assets/images/login/login-bg-img-dark.svg)}</style><link rel="stylesheet" href="styles.f5e1fc12dc71ab7f.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.f5e1fc12dc71ab7f.css"></noscript></head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
+    />
+    <title><%= title %></title>
+    <link rel="icon" href="/favicon.ico" />
+  </head>
   <body>
-    <app-root></app-root>
-    <div id="lp-page-loader"></div>
-  <script src="runtime.4857569de92956c2.js" type="module"></script><script src="polyfills.b7c94fae2e8cebb4.js" type="module"></script><script src="main.173e7b693b195935.js" type="module"></script></body>
+    <script>
+      (() => {
+        var htmlRoot = document.getElementById('htmlRoot');
+        var theme = window.localStorage.getItem('__APP__DARK__MODE__');
+        if (htmlRoot && theme) {
+          htmlRoot.setAttribute('data-theme', theme);
+          theme = htmlRoot = null;
+        }
+      })();
+    </script>
+    <div id="app">
+      <style>
+        html[data-theme='dark'] .app-loading {
+          background-color: #2c344a;
+        }
+
+        html[data-theme='dark'] .app-loading .app-loading-title {
+          color: rgb(255 255 255 / 85%);
+        }
+
+        .app-loading {
+          display: flex;
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          background-color: #f4f7f9;
+        }
+
+        .app-loading .app-loading-wrap {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          display: flex;
+          transform: translate3d(-50%, -50%, 0);
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+
+        .app-loading .dots {
+          display: flex;
+          padding: 98px;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .app-loading .app-loading-title {
+          display: flex;
+          margin-top: 30px;
+          font-size: 30px;
+          color: rgb(0 0 0 / 85%);
+          justify-content: center;
+          align-items: center;
+        }
+
+        .app-loading .app-loading-logo {
+          display: block;
+          width: 90px;
+          margin: 0 auto;
+          margin-bottom: 20px;
+        }
+
+        .dot {
+          position: relative;
+          display: inline-block;
+          width: 48px;
+          height: 48px;
+          margin-top: 30px;
+          font-size: 32px;
+          transform: rotate(45deg);
+          box-sizing: border-box;
+          animation: antRotate 1.2s infinite linear;
+        }
+
+        .dot i {
+          position: absolute;
+          display: block;
+          width: 20px;
+          height: 20px;
+          background-color: #0065cc;
+          border-radius: 100%;
+          opacity: 30%;
+          transform: scale(0.75);
+          animation: antSpinMove 1s infinite linear alternate;
+          transform-origin: 50% 50%;
+        }
+
+        .dot i:nth-child(1) {
+          top: 0;
+          left: 0;
+        }
+
+        .dot i:nth-child(2) {
+          top: 0;
+          right: 0;
+          animation-delay: 0.4s;
+        }
+
+        .dot i:nth-child(3) {
+          right: 0;
+          bottom: 0;
+          animation-delay: 0.8s;
+        }
+
+        .dot i:nth-child(4) {
+          bottom: 0;
+          left: 0;
+          animation-delay: 1.2s;
+        }
+        @keyframes antRotate {
+          to {
+            transform: rotate(405deg);
+          }
+        }
+        @keyframes antRotate {
+          to {
+            transform: rotate(405deg);
+          }
+        }
+        @keyframes antSpinMove {
+          to {
+            opacity: 100%;
+          }
+        }
+        @keyframes antSpinMove {
+          to {
+            opacity: 100%;
+          }
+        }
+      </style>
+      <div class="app-loading">
+        <div class="app-loading-wrap">
+          <img src="/resource/img/logo.png" class="app-loading-logo" alt="Logo" />
+          <div class="app-loading-dots">
+            <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
+          </div>
+          <div class="app-loading-title"><%= title %></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
